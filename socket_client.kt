@@ -3,28 +3,23 @@ import java.net.Socket
 
 fun main(args : Array<String>) {
 
-  var socket = Socket("127.0.0.1",8080)
-  var inStream= DataInputStream(socket.getInputStream()) // Socket INPUT (read from server)
-  var outStream= DataOutputStream(socket.getOutputStream()) // Socket OUTPUT (write to server)
+    var socket = Socket("127.0.0.1",1414)
 
-  //Send name
-  print("Type your name : ")
-  var name = readLine();
-  outStream.writeUTF(name);
-  outStream.flush()
+    var inStream = BufferedReader(InputStreamReader(socket.getInputStream())) // Socket INPUT (read from server)
+    var outStream =  PrintWriter(BufferedWriter(OutputStreamWriter(socket.getOutputStream())), true)
 
-  //Read & Write Threads
-  Thread{
+    //Read & Write Threads
+    Thread{
     while (true) {
-      outStream.writeUTF(readLine())
-      outStream.flush()
+      outStream.println(readLine())
     }
-  }.start()
+    }.start()
 
-  Thread {
+    Thread {
     while (true) {
-      println("Server says : " + inStream.readUTF())
+      println(inStream.readLine());
+      //println("Someone says : " + inStream.readUTF())
     }
-  }.start()
+    }.start()
 
 }
