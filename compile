@@ -1,4 +1,3 @@
 #!/bin/bash
-kotlinc socket_client.kt -include-runtime -d client.jar
-kotlinc socket_server.kt -include-runtime -d server.jar
+kotlinc socket_client.kt MySocket.kt -include-runtime -d client.jar
 

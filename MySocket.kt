@@ -8,47 +8,25 @@ class MySock(ip: String, port: Int) {
 
 
     init {
-        try {
-            socket = Socket(ip, port)
-        } catch (ex: IOException) {
-        }
-
+        socket = Socket(ip, port)
     }
 
-
     fun close() {
-        try {
-            socket!!.close()
-        } catch (ex: IOException) {
-        }
-
+        socket!!.close()
     }
 
     fun shutdownInput() {
-        try {
-            socket!!.shutdownInput()
-        } catch (ex: IOException) {
-        }
-
+        socket!!.shutdownInput()
     }
 
     fun write(line: String) {
-        try {
-            out = PrintWriter(socket!!.getOutputStream(), true)
-        } catch (ex: IOException) {
-        }
-
+        out = PrintWriter(socket!!.getOutputStream(), true)
         out!!.println(line)
     }
 
     fun read(): String? {
-        try {
-            input = BufferedReader(InputStreamReader(socket!!.getInputStream()))
-            return input!!.readLine()
-        } catch (ex: IOException) {
-        }
-
-        return null
+        input = BufferedReader(InputStreamReader(socket!!.getInputStream()))
+        return input!!.readLine()
     }
 
 }
